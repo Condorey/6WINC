@@ -374,7 +374,8 @@ async function loadResults(pid) {
     .from('antworten')
     .select('antwort')
     .eq('frage', cfg.frage);
-  if (error) { console.error(error); return; }
+  if (error) { console.error('load error:', error); return; }
+  console.log('poll', pid, 'data:', data, 'frage:', cfg.frage);
   const total  = data.length;
   const countA = data.filter(r => r.antwort === cfg.a).length;
   const pctA   = total === 0 ? 50 : Math.round(countA / total * 100);
