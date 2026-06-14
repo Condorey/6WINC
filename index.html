@@ -458,8 +458,6 @@ function tick(pid) {
 
 /* ─ Init ─ */
 window.addEventListener('DOMContentLoaded', async () => {
-  localStorage.removeItem('6w_done1');
-  localStorage.removeItem('6w_done2');
   try {
     if (typeof supabase !== 'undefined') {
       sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
