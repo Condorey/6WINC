@@ -378,7 +378,7 @@ async function loadResults(pid) {
   const total  = rows.length;
   const countA = rows.filter(r => r.antwort === cfg.a).length;
   const pctA   = total === 0 ? 0 : Math.round(countA / total * 100);
-  const pctB   = 100 - pctA;
+  const pctB   = total === 0 ? 0 : 100 - pctA;
   document.getElementById('p'+pid+'-pct-a').textContent = pctA+'%';
   document.getElementById('p'+pid+'-pct-b').textContent = pctB+'%';
   document.getElementById('p'+pid+'-total').textContent = total+' '+T[lang].total;
@@ -458,6 +458,8 @@ function tick(pid) {
 
 /* ─ Init ─ */
 window.addEventListener('DOMContentLoaded', async () => {
+  localStorage.removeItem('6w_done1');
+  localStorage.removeItem('6w_done2');
   try {
     if (typeof supabase !== 'undefined') {
       sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
