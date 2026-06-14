@@ -368,19 +368,16 @@ function selectVote(pid, opt) {
 
 /* ─ Load results ─ */
 async function loadResults(pid) {
-  if (!sb) { console.warn('sb is null'); return; }
+  if (!sb) return;
   const cfg = POLLS[pid];
-  console.log('loading pid', pid, 'frage:', cfg.frage);
   const { data, error } = await sb
     .from('antworten')
     .select('antwort, frage');
-  console.log('raw data:', data, 'error:', error);
   if (error) { console.error('load error:', error); return; }
   const rows   = data.filter(r => r.frage === cfg.frage);
-  console.log('filtered rows:', rows);
   const total  = rows.length;
   const countA = rows.filter(r => r.antwort === cfg.a).length;
-  const pctA   = total === 0 ? 50 : Math.round(countA / total * 100);
+  const pctA   = total === 0 ? 0 : Math.round(countA / total * 100);
   const pctB   = 100 - pctA;
   document.getElementById('p'+pid+'-pct-a').textContent = pctA+'%';
   document.getElementById('p'+pid+'-pct-b').textContent = pctB+'%';
@@ -461,9 +458,6 @@ function tick(pid) {
 
 /* ─ Init ─ */
 window.addEventListener('DOMContentLoaded', async () => {
-  localStorage.removeItem('6w_done1');
-  localStorage.removeItem('6w_done2');
-
   try {
     if (typeof supabase !== 'undefined') {
       sb = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
