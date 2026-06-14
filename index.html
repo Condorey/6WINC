@@ -272,7 +272,7 @@ footer p{font-family:'Rajdhani',sans-serif;font-size:.75rem;letter-spacing:2px;c
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 /* ─ Config ─ */
-const SUPABASE_URL = 'https://lhnrosbnooztrplrvmvn.supabase.co';
+const SUPABASE_URL = 'https://lhnrossnooztrplrvmvn.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImxobnJvc3Nub296dHJwbHJ2bXZuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE0NDA5OTMsImV4cCI6MjA5NzAxNjk5M30.HpQl9Im2d26Tp4Kttwl06Y7IdF6qkyXg53TzGvEU2sk';
 const POLLS = {
   1: { frage:'Deutschland vs Curacao', a:'Deutschland', b:'Curacao' },
@@ -422,7 +422,7 @@ function lockPoll(pid) {
 /* ─ Deadline ─ */
 function getDeadline(pid) {
   const n = new Date();
-  return new Date(n.getFullYear(), n.getMonth(), n.getDate(), pid===1?19:22, 30, 0, 0);
+  return new Date(n.getFullYear(), n.getMonth(), n.getDate(), pid===1?23:23, pid===1?59:59, 0, 0);
 }
 function expired(pid) { return new Date() >= getDeadline(pid); }
 function pad(n) { return String(n).padStart(2,'0'); }
